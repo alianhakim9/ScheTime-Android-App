@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ScheTime</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_splash_text">Easy schedule planner app\nwhich can be used to manage your time.</string>
+    <string name="label_btn_splash">Get Started</string>
+    <string name="label_welcome_text">Effective and free task tracker and schedule manager\nfree to help you manage time and enjoy an easy life.</string>
+    <string name="label_btn_welcome_sign_in">Sign in</string>
+    <string name="label_btn_welcome_sign_up">Sign up</string>
+    <string name="label_welcome_title">ScheTime!</string>
+    <string name="image_content_desc">image content desc</string>
+    <string name="label_sign_in_title">Welcome,\nBack!</string>
+    <string name="label_sign_in_desc"><![CDATA[Login to save your task & schedule]]></string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_sign_up_title">Welcome</string>
+    <string name="label_sign_up_desc">Create your account</string>
+    <string name="label_btn_sign_up">Sign Up</string>
+    <string name="label_full_name">Full Name</string>
+
+</resources>
