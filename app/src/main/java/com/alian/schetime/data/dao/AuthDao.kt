@@ -10,9 +10,9 @@ import com.alian.schetime.data.model.User
 interface AuthDao {
 
     @Query("SELECT * FROM users WHERE user_email=:email AND user_password=:password")
-    suspend fun signIn(email: String, password: String): User
+    suspend fun signIn(email: String, password: String): User?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun signUp(user: User)
+    suspend fun signUp(user: User): Long
 
 }

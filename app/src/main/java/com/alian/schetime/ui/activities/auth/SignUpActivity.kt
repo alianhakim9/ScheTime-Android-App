@@ -9,7 +9,11 @@ import com.alian.schetime.data.model.User
 import com.alian.schetime.ui.base.viewmodels.AuthViewModel
 import com.alian.schetime.ui.base.viewmodels.factory.AuthViewModelFactory
 import com.alian.schetime.utils.Resource
+import com.alian.schetime.utils.snackBar
 import com.example.schetime.databinding.ActivitySignUpBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -30,13 +34,12 @@ class SignUpActivity : AppCompatActivity(), KodeinAware {
 
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
-
         binding.buttonSignUp.setOnClickListener {
             val newUser = User(
                 id = 0,
-                name = binding.editTextFullName.text.toString().trim(),
-                email = binding.editTextEmail.text.toString().trim(),
-                password = binding.editTextPassword.text.toString().trim()
+                name = binding.editTextFullName.editText?.text.toString().trim(),
+                email = binding.editTextEmail.editText?.text.toString().trim(),
+                password = binding.editTextPassword.editText?.text.toString().trim()
             )
             viewModel.signUp(newUser)
         }
@@ -46,7 +49,11 @@ class SignUpActivity : AppCompatActivity(), KodeinAware {
                 is Resource.SuccessWithoutData -> {
                     binding.progressCircular.visibility = View.GONE
                     binding.buttonSignUp.visibility = View.VISIBLE
-                    Toast.makeText(this, "register success", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root,
+                        "sign up success, please sign in",
+                        Snackbar.LENGTH_LONG).also { snackbar ->
+
+                    }.show()
                 }
 
                 is Resource.Loading -> {
@@ -57,7 +64,7 @@ class SignUpActivity : AppCompatActivity(), KodeinAware {
                 is Resource.Error -> {
                     binding.progressCircular.visibility = View.GONE
                     binding.buttonSignUp.visibility = View.VISIBLE
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    binding.root.snackBar(it.message!!)
                 }
                 else -> {}
             }

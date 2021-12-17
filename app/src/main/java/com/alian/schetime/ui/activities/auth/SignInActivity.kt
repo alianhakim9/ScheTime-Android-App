@@ -1,14 +1,16 @@
 package com.alian.schetime.ui.activities.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.alian.schetime.ui.activities.HomeActivity
 import com.alian.schetime.ui.base.viewmodels.AuthViewModel
 import com.alian.schetime.ui.base.viewmodels.factory.AuthViewModelFactory
-import com.example.schetime.R
+import com.alian.schetime.utils.Resource
+import com.alian.schetime.utils.snackBar
 import com.example.schetime.databinding.ActivitySignInBinding
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -32,8 +34,8 @@ class SignInActivity : AppCompatActivity(), KodeinAware {
 
         binding.buttonSignIn.setOnClickListener {
             viewModel.signIn(
-                email = binding.editTextEmail.text.toString().trim(),
-                password = binding.editTextPassword.text.toString().trim()
+                email = binding.editTextEmail.editText?.text.toString().trim(),
+                password = binding.editTextPassword.editText?.text.toString().trim()
             )
         }
 
@@ -46,17 +48,24 @@ class SignInActivity : AppCompatActivity(), KodeinAware {
 
         viewModel.signIn.observe(this, {
             when (it) {
-                is Resource.Success -> {
-
+                is Resource.SuccessWithoutData -> {
+                    Intent(this, HomeActivity::class.java).also { intent ->
+                        startActivity(intent)
+                        finish()
+                    }
                 }
 
                 is Resource.Loading -> {
-
+                    binding.progressCircular.visibility = View.VISIBLE
+                    binding.buttonSignIn.visibility = View.GONE
                 }
 
                 is Resource.Error -> {
-
+                    binding.progressCircular.visibility = View.GONE
+                    binding.buttonSignIn.visibility = View.VISIBLE
+                    binding.root.snackBar(it.message!!)
                 }
+                else -> {}
             }
         })
     }

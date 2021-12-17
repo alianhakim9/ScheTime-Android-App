@@ -22,7 +22,7 @@
         android:id="@+id/text_view_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/label_splash_text"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -38,9 +38,9 @@
         android:backgroundTint="@color/custom_pink"
         android:text="@string/label_btn_splash"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        style="@style/ThemeOverlay.Material3.Button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

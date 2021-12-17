@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ScheTime">
         <activity
+            android:name="com.alian.schetime.ui.activities.EditUserActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.alian.schetime.ui.activities.AddNoteActivity"
+            android:exported="false" />
+        <activity
             android:name="com.alian.schetime.ui.activities.HomeActivity"
             android:exported="false" />
         <activity

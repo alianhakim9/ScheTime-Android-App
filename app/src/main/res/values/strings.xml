@@ -17,5 +17,10 @@
     <string name="label_sign_up_desc">Create your account</string>
     <string name="label_btn_sign_up">Sign Up</string>
     <string name="label_full_name">Full Name</string>
+    <string name="label_title">Title</string>
+    <string name="label_edit_profile">Edit Profile</string>
+    <string name="label_profile_name_example">Alian Hakim</string>
+    <string name="label_profile_job_title_example">Software Engineer</string>
+    <string name="label_my_schedule">My Schedule</string>
 
 </resources>

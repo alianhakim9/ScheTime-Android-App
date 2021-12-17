@@ -1,5 +1,6 @@
 package com.alian.schetime.ui.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,21 +21,25 @@ class WelcomeActivity : AppCompatActivity(), KodeinAware {
 
     private val factory: AuthViewModelFactory by instance()
     private lateinit var viewModel: AuthViewModel
+    var wa: Activity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        wa = this
+
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
-        binding.btnLogin.setOnClickListener {
+        binding.buttonToSignIn.setOnClickListener {
             Intent(this, SignInActivity::class.java).also {
+                it.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(it)
             }
         }
 
-        binding.btnRegister.setOnClickListener {
+        binding.buttonToSignUp.setOnClickListener {
             Intent(this, SignUpActivity::class.java).also {
                 startActivity(it)
             }

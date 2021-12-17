@@ -3,13 +3,18 @@ package com.alian.schetime.data.db
 import android.content.Context
 import androidx.room.*
 import com.alian.schetime.data.dao.AuthDao
+import com.alian.schetime.data.dao.NoteDao
+import com.alian.schetime.data.dao.UserDao
+import com.alian.schetime.data.model.Note
 import com.alian.schetime.data.model.User
 
 @Database(
-    entities = [User::class], version = 1, exportSchema = false
+    entities = [User::class, Note::class], version = 1, exportSchema = false
 )
 abstract class ScheTimeDB : RoomDatabase() {
     abstract fun authDao(): AuthDao
+    abstract fun noteDao(): NoteDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
