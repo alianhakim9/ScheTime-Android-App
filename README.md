@@ -31,7 +31,7 @@ From Android Studio:
 
 ## Maintainers
 This project is mantained by:
-* [Federico Ramundo](http://github.com/alianhakim)
+* [Alian Hakim](http://github.com/alianhakim)
 
 
 ## Contributing
