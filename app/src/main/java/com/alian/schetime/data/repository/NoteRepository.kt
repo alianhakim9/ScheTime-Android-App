@@ -11,4 +11,8 @@ class NoteRepository(
 
     fun get(userId: Int) = db.noteDao().getNote(userId)
 
+    suspend fun update(note: Note) = db.noteDao().updateNote(note)
+
+    suspend fun delete(note: Note) = db.noteDao().deleteNote(note)
+
 }

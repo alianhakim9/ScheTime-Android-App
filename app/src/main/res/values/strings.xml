@@ -22,5 +22,10 @@
     <string name="label_profile_name_example">Alian Hakim</string>
     <string name="label_profile_job_title_example">Software Engineer</string>
     <string name="label_my_schedule">My Schedule</string>
+    <string name="title_activity_test_compose">TestComposeActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_welcome_compose">WelcomeActivityCompose</string>
+    <string name="title_activity_main_compose">MainActivityCompose</string>
+    <string name="title_activity_sign_in_compose">SignInActivityCompose</string>
 
 </resources>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.alian.schetime.ui.activities.AddNoteActivity">
+    tools:context="com.alian.schetime.ui.activities.notes.AddNoteActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,8 +32,11 @@
             android:id="@+id/edit_text_title"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:autofillHints="fill_hint"
             android:background="@color/white"
             android:hint="Write the title"
+            android:inputType="text"
+            android:maxLines="1"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -44,9 +47,11 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="165dp"
+            android:autofillHints="fill_hint"
             android:background="@color/white"
             android:gravity="top"
             android:hint="wrote your note description"
+            android:inputType="text"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

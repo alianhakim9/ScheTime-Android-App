@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@color/white"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp">
 
@@ -36,9 +38,12 @@
 
         <TextView
             android:id="@+id/text_view_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Promotional Meeting"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_target_time"
             app:layout_constraintTop_toBottomOf="@+id/text_view_target_time" />
 

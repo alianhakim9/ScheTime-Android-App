@@ -1,5 +1,6 @@
 package com.alian.schetime.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.alian.schetime.ui.activities.HomeActivity
+import com.alian.schetime.ui.activities.notes.DetailUpdateNoteActivity
 import com.alian.schetime.ui.base.adapters.NoteAdapter
 import com.alian.schetime.ui.base.viewmodels.NoteViewModel
 import com.alian.schetime.utils.Resource
 import com.alian.schetime.utils.snackBar
 import com.example.schetime.R
 import com.example.schetime.databinding.FragmentDashboardBinding
+import java.io.Serializable
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
@@ -59,7 +61,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         viewModel.user.observe(this, {
             binding.textViewGreeting.text = it.name
         })
+
         binding.imageViewUser.load(R.drawable.ic_avatar_user)
+
+        _adapter.setOnItemClickListener { note ->
+            Intent(context, DetailUpdateNoteActivity::class.java).also {
+                it.putExtra("extra_note", note as Serializable)
+                startActivity(it)
+            }
+        }
         return view
     }
 

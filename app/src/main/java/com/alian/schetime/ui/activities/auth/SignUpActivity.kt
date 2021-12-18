@@ -1,9 +1,9 @@
 package com.alian.schetime.ui.activities.auth
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.alian.schetime.data.model.User
 import com.alian.schetime.ui.base.viewmodels.AuthViewModel
@@ -12,8 +12,6 @@ import com.alian.schetime.utils.Resource
 import com.alian.schetime.utils.snackBar
 import com.example.schetime.databinding.ActivitySignUpBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -47,22 +45,25 @@ class SignUpActivity : AppCompatActivity(), KodeinAware {
         viewModel.signUp.observe(this, {
             when (it) {
                 is Resource.SuccessWithoutData -> {
-                    binding.progressCircular.visibility = View.GONE
                     binding.buttonSignUp.visibility = View.VISIBLE
                     Snackbar.make(binding.root,
-                        "sign up success, please sign in",
-                        Snackbar.LENGTH_LONG).also { snackbar ->
-
-                    }.show()
+                        "Sign up success, please sign in",
+                        Snackbar.LENGTH_LONG)
+                        .setAction("OK") {
+                            // Responds to click on the action
+                            Intent(this, SignInActivity::class.java).also {
+                                startActivity(it)
+                                finish()
+                            }
+                        }
+                        .show()
                 }
 
                 is Resource.Loading -> {
-                    binding.progressCircular.visibility = View.VISIBLE
                     binding.buttonSignUp.visibility = View.GONE
                 }
 
                 is Resource.Error -> {
-                    binding.progressCircular.visibility = View.GONE
                     binding.buttonSignUp.visibility = View.VISIBLE
                     binding.root.snackBar(it.message!!)
                 }

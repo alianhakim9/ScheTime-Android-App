@@ -2,6 +2,7 @@ package com.alian.schetime.data.model
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import java.io.Serializable
 
 @Entity(
     foreignKeys = [
@@ -25,4 +26,4 @@ data class Note(
     val time: String = "",
     @ColumnInfo(name = "user_id")
     val userId: Int,
-)
+) : Serializable

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/custom_white"
     android:padding="30dp"
     tools:context="com.alian.schetime.ui.fragments.ProfileFragment">
 
@@ -32,7 +31,6 @@
         style="@style/TextAppearance.Material3.BodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_profile_job_title_example"
         app:layout_constraintStart_toStartOf="@+id/text_view_user_name"
         app:layout_constraintTop_toBottomOf="@+id/text_view_user_name" />
 
@@ -79,5 +77,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_my_schedule"
-        tools:listitem="@layout/item_note" />
+        tools:listitem="@layout/my_item_note" />
 </androidx.constraintlayout.widget.ConstraintLayout>

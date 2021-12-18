@@ -1,10 +1,10 @@
 package com.alian.schetime.ui.activities.auth
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.alian.schetime.ui.activities.HomeActivity
 import com.alian.schetime.ui.base.viewmodels.AuthViewModel
@@ -32,6 +32,17 @@ class SignInActivity : AppCompatActivity(), KodeinAware {
 
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
+        viewModel.isLoggedIn.observe(this, {
+            Intent(this, HomeActivity::class.java).also {
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                it.putExtra("EXIT", true)
+                startActivity(it)
+                finish()
+            }
+        })
+
         binding.buttonSignIn.setOnClickListener {
             viewModel.signIn(
                 email = binding.editTextEmail.editText?.text.toString().trim(),
@@ -39,31 +50,28 @@ class SignInActivity : AppCompatActivity(), KodeinAware {
             )
         }
 
-        viewModel.isLoggedIn.observe(this, {
-            Intent(this, HomeActivity::class.java).also {
-                startActivity(it)
-                finish()
-            }
-        })
-
-        viewModel.signIn.observe(this, {
-            when (it) {
+        viewModel.signIn.observe(this, { res ->
+            when (res) {
                 is Resource.SuccessWithoutData -> {
-                    Intent(this, HomeActivity::class.java).also { intent ->
-                        startActivity(intent)
+                    Intent(this, HomeActivity::class.java).also {
+                        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        it.putExtra("EXIT", true)
+                        startActivity(it)
                         finish()
                     }
-                }
-
-                is Resource.Loading -> {
-                    binding.progressCircular.visibility = View.VISIBLE
-                    binding.buttonSignIn.visibility = View.GONE
                 }
 
                 is Resource.Error -> {
                     binding.progressCircular.visibility = View.GONE
                     binding.buttonSignIn.visibility = View.VISIBLE
-                    binding.root.snackBar(it.message!!)
+                    binding.root.snackBar(res.message!!)
+                }
+
+                is Resource.Loading -> {
+                    binding.progressCircular.visibility = View.VISIBLE
+                    binding.buttonSignIn.visibility = View.INVISIBLE
                 }
                 else -> {}
             }

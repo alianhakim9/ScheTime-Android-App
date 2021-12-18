@@ -3,6 +3,7 @@ package com.alian.schetime.ui.base.viewmodels
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,6 +33,9 @@ class NoteViewModel(
 
     private var _addNote = MutableLiveData<Resource<Any>>()
     val addNote: LiveData<Resource<Any>> = _addNote
+
+    private var _updateNote = MutableLiveData<Resource<Any>>()
+    val updateNote: LiveData<Resource<Any>> = _updateNote
 
     private var _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
@@ -64,8 +68,27 @@ class NoteViewModel(
         } else {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.add(newNote)
+                loadNotes()
             }
             _addNote.postValue(Resource.SuccessWithoutData())
+        }
+    }
+
+    fun updateNote(note: Note) {
+        if (note.title.isEmpty() || note.text.isEmpty()) {
+            _updateNote.postValue(Resource.Error("can't be empty"))
+        } else {
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.update(note)
+            }
+            _updateNote.postValue(Resource.SuccessWithoutData())
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(note)
+            loadNotes()
         }
     }
 
@@ -95,6 +118,7 @@ class NoteViewModel(
                 putString(Shared_User_Pref, json)
                 apply()
             }
+
             _updateProfile.postValue(Resource.SuccessWithoutData())
         }
     }
@@ -106,6 +130,4 @@ class NoteViewModel(
             apply()
         }
     }
-
-
 }

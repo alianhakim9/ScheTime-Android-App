@@ -1,7 +1,9 @@
 package com.alian.schetime.data.model
 
-import androidx.annotation.NonNull
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "users",
@@ -15,6 +17,8 @@ data class User(
     val name: String = "",
     @ColumnInfo(name = "user_email")
     val email: String,
+    @ColumnInfo(name = "job_title")
+    val jobTitle: String = "Job Title",
     @ColumnInfo(name = "user_password")
     val password: String = "",
 )

@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/custom_white"
     tools:context="com.alian.schetime.ui.fragments.DashboardFragment">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +15,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:contentDescription="@string/image_content_desc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

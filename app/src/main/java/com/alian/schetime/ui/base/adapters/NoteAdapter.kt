@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alian.schetime.data.model.Note
+import com.example.schetime.R
 import com.example.schetime.databinding.ItemNoteBinding
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.DataViewHolder>() {
@@ -27,8 +28,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Note) {
-            binding.textViewTargetTime.text = note.time
-            binding.textViewTitle.text = note.title
+            binding.textViewTargetTime.text = note.title
+            binding.textViewTitle.text = note.text
         }
     }
 
@@ -39,16 +40,41 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.DataViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
+        val note = differ.currentList[position]
         holder.bind(differ.currentList[position])
+        holder.itemView.apply {
+            setOnClickListener {
+                onItemClickListener?.let {
+                    it(note)
+                }
+            }
+
+            setOnLongClickListener {
+                onLongItemClickListener?.let {
+                    it(note)
+                }
+                true
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-//        return if (differ.currentList.size < limit) {
-//            differ.currentList.size
-//        } else {
-//            limit
-//        }
+        return if (differ.currentList.size < limit) {
+            differ.currentList.size
+        } else {
+            limit
+        }
+    }
 
-        return differ.currentList.size
+    private var onItemClickListener: ((Note) -> Unit)? = null
+
+    private var onLongItemClickListener: ((Note) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Note) -> Unit) {
+        onItemClickListener = listener
+    }
+
+    fun setOnLongItemClickListener(listener: (Note) -> Unit) {
+        onLongItemClickListener = listener
     }
 }
