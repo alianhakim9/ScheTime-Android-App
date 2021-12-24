@@ -1,6 +1,6 @@
 # ScheTime Note App
 
-Aplikasi Note untuk mobile native android.
+Application for create note.
 
 ## Installation
 Clone this repository and import into **Android Studio**
