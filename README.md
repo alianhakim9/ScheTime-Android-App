@@ -5,7 +5,7 @@ Application for create note.
 ## Installation
 Clone this repository and import into **Android Studio**
 ```bash
-git clone git@github.com:wolox/ScheTime.git
+git@github.com:alianhakim8/ScheTime.git
 ```
 
 ## Configuration
